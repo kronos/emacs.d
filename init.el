@@ -93,22 +93,30 @@
         (:name smart-mode-line
                :type github
                :pkgname "Bruce-Connor/smart-mode-line"
-               :features smart-mode-line)
+               :features smart-mode-line)))
         ;; с официальным не совместим clj-refactor.el там куда то делся paredit-move-forward
-        (:name paredit
-               :type github
-               :pkgname "emacsmirror/paredit")))
+        ;;(:name paredit
+        ;;       :type github
+        ;;       :pkgname "emacsmirror/paredit")
 
 ;; more packages
 ;; smex - command autocomlete
 ;; exec-path-from-shell - to make work nrepl
 (setq dim-packages
       (append
-       '(yasnippet smex rich-minority org-mode auto-complete undo-tree auto-complete ac-nrepl cl-lib multiple-cursors clj-refactor
+       '(yasnippet smartparens flx smex rich-minority org-mode auto-complete undo-tree auto-complete ac-nrepl cl-lib multiple-cursors clj-refactor
                     rainbow-delimiters exec-path-from-shell)
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
 
 (el-get 'sync dim-packages)
+
+; flx-ido
+(require 'flx)
+(require 'flx-ido)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
@@ -239,6 +247,23 @@
 (setq mac-option-modifier 'hyper)
 (setq mac-right-option-modifier 'alt)
 
+;; paredit
+(require 'clojure-mode)
+(require 'smartparens-config)
+;(enable-paredit-mode)
+;(add-hook 'clojure-mode-hook #'paredit-mode)
+(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+(smartparens-global-mode t)
+(show-smartparens-global-mode t)
+;; |foobar
+;; hit C-(
+;; becomes (|foobar)
+(sp-pair "(" ")" :wrap "C-(")
+
+;; projectile
+(projectile-global-mode)
+
+
 ;; Show line numbers
 (global-linum-mode)
 
@@ -268,12 +293,12 @@
 ;; no backup files
 (setq make-backup-files nil)
 
- (custom-set-variables
+(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (queue))))
+ '(package-selected-packages (quote (nil queue))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
