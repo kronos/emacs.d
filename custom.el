@@ -42,3 +42,14 @@
 
 ;; Show line numbers
 (global-linum-mode)
+
+;; no autosave
+(setq auto-save-default nil)
+
+;; smex
+;; Enhances M-x to allow easier execution of commands. Provides
+;; a filterable list of possible commands in the minibuffer
+;; http://www.emacswiki.org/emacs/Smex
+(setq smex-save-file (concat user-emacs-directory "misc" ".smex-items"))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
