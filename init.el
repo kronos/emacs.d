@@ -24,7 +24,20 @@
   '(;; Enhances M-x to allow easier execution of commands. Provides
     ;; a filterable list of possible commands in the minibuffer
     ;; http://www.emacswiki.org/emacs/Smex
-    smex))
+    smex
+    ;; obvious
+    clojure-mode
+    ;; extra syntax highlighting for clojure
+    clojure-mode-extra-font-locking
+    ;; clojure repl
+    cider
+    ;; brackets!
+    paredit
+    ;; autocomplete for opening files
+    ido-ubiquitous
+    ;; take $PATH from the env
+    exec-path-from-shell
+    ))
 
 ;; On OS X, an Emacs instance started from the graphical user
 ;; interface will have a different environment than a shell in a
@@ -62,7 +75,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (smex exec-path-from-shell))))
+ '(package-selected-packages
+   (quote
+    (ido-ubiquitous smex paredit exec-path-from-shell clojure-mode-extra-font-locking cider))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
