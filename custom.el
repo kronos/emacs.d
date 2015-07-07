@@ -36,15 +36,15 @@
 ;; disable start screen
 (setq inhibit-startup-screen +1)
 
-;; backups
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+;; disable backups and autosave
+(setq make-backup-files nil)
 (setq auto-save-default nil)
 
 ;; Show line numbers
 (global-linum-mode)
 
-;; no autosave
-(setq auto-save-default nil)
+;; Changes all yes/no questions to y/n type
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; smex
 ;; Enhances M-x to allow easier execution of commands. Provides
@@ -97,6 +97,9 @@
 
 ;; enable paredit in your REPL
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
+
+;; Highlights matching parenthesis
+(show-paren-mode 1)
 
 ;; Use clojure mode for other extensions
 (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
